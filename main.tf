@@ -13,7 +13,7 @@ resource "aws_route53_record" "pslab-record-A" {
   name = each.key
   type = "A"
   ttl = 300
-  records = [ each.value ]
+  records = each.value
 
 }
 
@@ -24,7 +24,7 @@ resource "aws_route53_record" "pslab-record-NS" {
   name = each.key
   type = "NS"
   ttl = 300
-  records = [ each.value ]
+  records = each.value
 
 }
 
@@ -35,6 +35,6 @@ resource "aws_route53_record" "pslab-record-MX" {
   name = each.key
   type = "MX"
   ttl = 300
-  records = [ each.value ]
+  records = each.value
 
 }
