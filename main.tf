@@ -1,19 +1,34 @@
 resource "aws_route53_zone" "pscloud-primary" {
-  name = var.pscloud_domain_name
+  name                    = var.pscloud_domain_name
 
   tags = {
-    Name = "${var.pscloud_company}_r53_zone_${var.pscloud_env}"
+    Name                  = "${var.pscloud_company}_r53_zone_${var.pscloud_env}"
   }
 }
 
 resource "aws_route53_record" "pslab-record-A" {
-  for_each =  var.pscloud_domain_records_A
+  for_each                =  var.pscloud_domain_records_A
 
-  zone_id = aws_route53_zone.pscloud-primary.zone_id
-  name = each.key
-  type = "A"
-  ttl = 300
-  records = each.value
+  zone_id                 = aws_route53_zone.pscloud-primary.zone_id
+  name                    = each.key
+  type                    = "A"
+  ttl                     = 300
+  records                 = each.value
+
+}
+
+resource "aws_route53_record" "pslab-record-ALIAS" {
+  count                   =  length(var.pscloud_domain_records_ALIAS)
+
+  zone_id                 = aws_route53_zone.pscloud-primary.zone_id
+  name                    = var.pscloud_domain_records_ALIAS[count.index]
+  type                    = "A"
+
+  alias {
+    name                   = var.pscloud_domain_records_ALIAS_dns_name[count.index]
+    zone_id                = var.pscloud_domain_records_ALIAS_zone_id[count.index]
+    evaluate_target_health = false
+  }
 
 }
 
