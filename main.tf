@@ -21,12 +21,12 @@ resource "aws_route53_record" "pslab-record-ALIAS" {
   count                   =  length(var.pscloud_domain_records_ALIAS)
 
   zone_id                 = aws_route53_zone.pscloud-primary.zone_id
-  name                    = var.pscloud_domain_records_ALIAS[count.index]
+  name                    = split(",", var.pscloud_domain_records_ALIAS[count.index])[0]
   type                    = "A"
 
   alias {
-    name                   = var.pscloud_domain_records_ALIAS_dns_name[count.index]
-    zone_id                = var.pscloud_domain_records_ALIAS_zone_id[count.index]
+    name                   = split(",", var.pscloud_domain_records_ALIAS[count.index])[2]
+    zone_id                = split(",", var.pscloud_domain_records_ALIAS[count.index])[1]
     evaluate_target_health = false
   }
 
