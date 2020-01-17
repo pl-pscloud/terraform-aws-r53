@@ -7,49 +7,71 @@ resource "aws_route53_zone" "pscloud-primary" {
 }
 
 resource "aws_route53_record" "pslab-record-A" {
-  for_each                =  var.pscloud_domain_records_A
+  count                   = length(var.pscloud_domain_records_A)
 
   zone_id                 = aws_route53_zone.pscloud-primary.zone_id
-  name                    = each.key
+  name                    = var.pscloud_domain_records_A[count.index].name
   type                    = "A"
-  ttl                     = 300
-  records                 = each.value
+  ttl                     = var.pscloud_domain_records_A[count.index].ttl
+  records                 = var.pscloud_domain_records_A[count.index].val
 
 }
 
 resource "aws_route53_record" "pslab-record-ALIAS" {
-  count                   =  length(var.pscloud_domain_records_ALIAS)
+  count                 = length(var.pscloud_domain_records_ALIAS)
 
   zone_id                 = aws_route53_zone.pscloud-primary.zone_id
-  name                    = split(",", var.pscloud_domain_records_ALIAS[count.index])[0]
+  name                    = var.pscloud_domain_records_ALIAS[count.index].name
   type                    = "A"
 
   alias {
-    name                   = split(",", var.pscloud_domain_records_ALIAS[count.index])[2]
-    zone_id                = split(",", var.pscloud_domain_records_ALIAS[count.index])[1]
+    name                   = var.pscloud_domain_records_ALIAS[count.index].val
+    zone_id                = var.pscloud_domain_records_ALIAS[count.index].zoneid
     evaluate_target_health = false
   }
 
 }
 
 resource "aws_route53_record" "pslab-record-NS" {
-  for_each =  var.pscloud_domain_records_NS
+  count                   = length(var.pscloud_domain_records_NS)
 
-  zone_id = aws_route53_zone.pscloud-primary.zone_id
-  name = each.key
-  type = "NS"
-  ttl = 300
-  records = each.value
+  zone_id                 = aws_route53_zone.pscloud-primary.zone_id
+  name                    = var.pscloud_domain_records_NS[count.index].name
+  type                    = "NS"
+  ttl                     = var.pscloud_domain_records_NS[count.index].ttl
+  records                 = var.pscloud_domain_records_NS[count.index].val
 
 }
 
 resource "aws_route53_record" "pslab-record-MX" {
-  for_each =  var.pscloud_domain_records_MX
+  count                   = length(var.pscloud_domain_records_MX)
 
-  zone_id = aws_route53_zone.pscloud-primary.zone_id
-  name = each.key
-  type = "MX"
-  ttl = 300
-  records = each.value
+  zone_id                 = aws_route53_zone.pscloud-primary.zone_id
+  name                    = var.pscloud_domain_records_MX[count.index].name
+  type                    = "MX"
+  ttl                     = var.pscloud_domain_records_MX[count.index].ttl
+  records                 = var.pscloud_domain_records_MX[count.index].val
+
+}
+
+resource "aws_route53_record" "pslab-record-SRV" {
+  count                   = length(var.pscloud_domain_records_SRV)
+
+  zone_id                 = aws_route53_zone.pscloud-primary.zone_id
+  name                    = var.pscloud_domain_records_SRV[count.index].name
+  type                    = "SRV"
+  ttl                     = var.pscloud_domain_records_SRV[count.index].ttl
+  records                 = var.pscloud_domain_records_SRV[count.index].val
+
+}
+
+resource "aws_route53_record" "pslab-record-TXT" {
+  count                   = length(var.pscloud_domain_records_TXT)
+
+  zone_id                 = aws_route53_zone.pscloud-primary.zone_id
+  name                    = var.pscloud_domain_records_TXT[count.index].name
+  type                    = "TXT"
+  ttl                     = var.pscloud_domain_records_TXT[count.index].ttl
+  records                 = var.pscloud_domain_records_TXT[count.index].val
 
 }
