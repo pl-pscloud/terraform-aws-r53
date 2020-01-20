@@ -75,3 +75,14 @@ resource "aws_route53_record" "pslab-record-TXT" {
   records                 = var.pscloud_domain_records_TXT[count.index].val
 
 }
+
+resource "aws_route53_record" "pslab-record-CNAME" {
+  count                   = length(var.pscloud_domain_records_CNAME)
+
+  zone_id                 = aws_route53_zone.pscloud-primary.zone_id
+  name                    = var.pscloud_domain_records_CNAME[count.index].name
+  type                    = "CNAME"
+  ttl                     = var.pscloud_domain_records_CNAME[count.index].ttl
+  records                 = var.pscloud_domain_records_CNAME[count.index].val
+
+}

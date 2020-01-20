@@ -49,3 +49,11 @@ variable "pscloud_domain_records_TXT" {
     ttl       = number
   }))
 }
+
+variable "pscloud_domain_records_CNAME" {
+  type = list(object({
+    name      = string
+    val       = set(string)
+    ttl       = number
+  }))
+}
