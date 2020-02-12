@@ -8,6 +8,7 @@ variable "pscloud_domain_records_A" {
     val       = set(string)
     ttl       = number
   }))
+  default = []
 }
 
 variable "pscloud_domain_records_NS" {
@@ -16,6 +17,7 @@ variable "pscloud_domain_records_NS" {
     val       = set(string)
     ttl       = number
   }))
+  default = []
 }
 
 variable "pscloud_domain_records_MX" {
@@ -24,6 +26,7 @@ variable "pscloud_domain_records_MX" {
     val       = set(string)
     ttl       = number
   }))
+  default = []
 }
 
 variable "pscloud_domain_records_ALIAS" {
@@ -32,6 +35,7 @@ variable "pscloud_domain_records_ALIAS" {
     val       = string
     zoneid    = string
   }))
+  default = []
 }
 
 variable "pscloud_domain_records_SRV" {
@@ -40,6 +44,7 @@ variable "pscloud_domain_records_SRV" {
     val       = set(string)
     ttl       = number
   }))
+  default = []
 }
 
 variable "pscloud_domain_records_TXT" {
@@ -48,6 +53,7 @@ variable "pscloud_domain_records_TXT" {
     val       = set(string)
     ttl       = number
   }))
+  default = []
 }
 
 variable "pscloud_domain_records_CNAME" {
@@ -56,4 +62,5 @@ variable "pscloud_domain_records_CNAME" {
     val       = set(string)
     ttl       = number
   }))
+  default = []
 }
