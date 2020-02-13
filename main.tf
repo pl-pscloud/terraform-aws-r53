@@ -6,7 +6,7 @@ resource "aws_route53_zone" "pscloud-primary" {
   }
 }
 
-resource "aws_route53_record" "pslab-record-A" {
+resource "aws_route53_record" "pscloud-record-A" {
   count                   = length(var.pscloud_domain_records_A)
 
   zone_id                 = aws_route53_zone.pscloud-primary.zone_id
@@ -17,7 +17,7 @@ resource "aws_route53_record" "pslab-record-A" {
 
 }
 
-resource "aws_route53_record" "pslab-record-ALIAS" {
+resource "aws_route53_record" "pscloud-record-ALIAS" {
   count                 = length(var.pscloud_domain_records_ALIAS)
 
   zone_id                 = aws_route53_zone.pscloud-primary.zone_id
@@ -32,7 +32,7 @@ resource "aws_route53_record" "pslab-record-ALIAS" {
 
 }
 
-resource "aws_route53_record" "pslab-record-NS" {
+resource "aws_route53_record" "pscloud-record-NS" {
   count                   = length(var.pscloud_domain_records_NS)
 
   zone_id                 = aws_route53_zone.pscloud-primary.zone_id
@@ -43,7 +43,7 @@ resource "aws_route53_record" "pslab-record-NS" {
 
 }
 
-resource "aws_route53_record" "pslab-record-MX" {
+resource "aws_route53_record" "pscloud-record-MX" {
   count                   = length(var.pscloud_domain_records_MX)
 
   zone_id                 = aws_route53_zone.pscloud-primary.zone_id
@@ -54,7 +54,7 @@ resource "aws_route53_record" "pslab-record-MX" {
 
 }
 
-resource "aws_route53_record" "pslab-record-SRV" {
+resource "aws_route53_record" "pscloud-record-SRV" {
   count                   = length(var.pscloud_domain_records_SRV)
 
   zone_id                 = aws_route53_zone.pscloud-primary.zone_id
@@ -65,7 +65,7 @@ resource "aws_route53_record" "pslab-record-SRV" {
 
 }
 
-resource "aws_route53_record" "pslab-record-TXT" {
+resource "aws_route53_record" "pscloud-record-TXT" {
   count                   = length(var.pscloud_domain_records_TXT)
 
   zone_id                 = aws_route53_zone.pscloud-primary.zone_id
@@ -76,7 +76,7 @@ resource "aws_route53_record" "pslab-record-TXT" {
 
 }
 
-resource "aws_route53_record" "pslab-record-CNAME" {
+resource "aws_route53_record" "pscloud-record-CNAME" {
   count                   = length(var.pscloud_domain_records_CNAME)
 
   zone_id                 = aws_route53_zone.pscloud-primary.zone_id
